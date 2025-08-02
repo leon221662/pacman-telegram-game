@@ -2,6 +2,8 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
+  <!-- Добавлен viewport для мобильных -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Pacman Mini App</title>
   <style>
     body {
@@ -15,31 +17,52 @@
       user-select: none;
       -webkit-user-select: none;
       -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation; /* Блокирует масштабирование */
     }
     canvas {
       display: block;
       background: black;
+      max-width: 100%; /* Добавлено */
+      height: auto; /* Добавлено */
     }
     #scoreDisplay {
       margin: 10px;
-      font-size: 20px;
+      font-size: 4vw; /* Изменено на vw */
     }
 
-    /* Контейнер кнопок - сетка 3x2 */
-    #controls {
-      display: grid;
-      grid-template-columns: 150px 150px 250px;
-      grid-template-rows: 150px 60px;
-      gap: 160px;
-      justify-content: center;
-      margin-bottom: 
-      0px;
-      touch-action: manipulation;
-    }
+    /* Обновленные стили кнопок */
+     #controls {
+    display: grid;
+    grid-template-areas:
+      ". up ."
+      "left . right"
+      ". down .";
+    gap: 2vw;
+    margin: 5vw 0;
+    justify-items: center;
+  }
+  #up { grid-area: up; }
+  #left { grid-area: left; }
+  #right { grid-area: right; }
+  #down { grid-area: down; }
+  
+  #controls button {
+    width: 20vw;
+    height: 20vw;
+    font-size: 10vw;
+    /* Остальные стили без изменений */
+    font-weight: bold;
+    color: black;
+    background: white;
+    border-radius: 1000px;
+    border: none;
+  }
 
-    /* Общие стили для кнопок */
     #controls button {
-      font-size: 100px;
+      font-size: 10vw; /* Изменено на vw */
+      width: 20vw; /* Изменено на vw */
+      height: 20vw; /* Изменено на vw */
+      /* Остальные стили без изменений */
       font-weight: bold;
       color: black;
       background: white;
@@ -47,34 +70,14 @@
       border: none;
       cursor: pointer;
       outline: none;
-      width: 250px;
-      height: 250px;
-    }
-
-    /* Расположение кнопок в сетке */
-    #up {
-      grid-column: 2 / 3;
-      grid-row: 1 / 2;
-    }
-    #left {
-      grid-column: 1 / 2;
-      grid-row: 2 / 3;
-    }
-    #down {
-      grid-column: 2 / 3;
-      grid-row: 2 / 3;
-    }
-    #right {
-      grid-column: 3 / 4;
-      grid-row: 2 / 3;
     }
   </style>
 </head>
 <body>
+  <!-- Остальное без изменений -->
   <p id="scoreDisplay">Счёт: 0</p>
   <canvas id="gameCanvas"></canvas>
 
-  <!-- Кнопки управления -->
   <div id="controls">
     <button id="up">▲</button>
     <button id="left">◄</button>

@@ -35,11 +35,22 @@ const map = [
 let score = 0;
 let totalDots = 0;
 
-const tileSize = Math.min(
-  Math.floor(window.innerWidth / map[0].length),
-  Math.floor(window.innerHeight / map.length)
-);
+const calculateTileSize = () => {
+  const maxWidth = Math.min(window.innerWidth, 500); // Ограничиваем максимальную ширину
+  return Math.floor(maxWidth / map[0].length);
+};
 
+let tileSize = calculateTileSize();
+
+// Пересчитываем при изменении размера экрана
+window.addEventListener('resize', () => {
+  tileSize = calculateTileSize();
+  canvas.width = tileSize * map[0].length;
+  canvas.height = tileSize * map.length;
+  drawGame();
+});
+
+// Инициализация canvas (заменяем старый код)
 canvas.width = tileSize * map[0].length;
 canvas.height = tileSize * map.length;
 
