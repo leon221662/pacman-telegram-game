@@ -1,0 +1,13 @@
+{
+  "name": "pacman-telegram",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "serve"
+  },
+  "dependencies": {
+    "serve": "^14.0.0"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
